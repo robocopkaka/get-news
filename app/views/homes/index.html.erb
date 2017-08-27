@@ -1,8 +1,14 @@
-<% @news.each do |sources| %>
-  <% sources.each do |key, val| %>
-    <div class = "row">
-      Source: <%= key %>
-  	  <!--  -->
-    </div>
-  <% end %>
+<% @news.each do |key, values| %>
+  <div class = "row news_group">
+    <p id="source">News from <%= key %></p>
+    <ul class="thumbnail-grid">
+      <% values.each do |value| %>
+        <li class="thumbnail-list-item">
+          <%= image_tag("apple-touch-icon.png") %>
+          <h3> <%= link_to value["title"], value["url"], target: :_blank  %> </h3>
+          <p><%= value["description"] %></p>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>

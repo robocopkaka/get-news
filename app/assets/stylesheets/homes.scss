@@ -1,3 +1,42 @@
 // Place all the styles related to the Homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#source{
+	font-size: 30px;
+	color: red;
+	text-align: center;
+}
+
+.news_group{
+	margin: 20px;
+}
+
+.thumbnail-grid{
+	list-style-type: none;
+	width: 500px;
+}
+
+.thumbnail-list-item{
+	padding: 10px;
+	overflow: auto;
+
+	p{
+	  font: 200 12px/1.5 Georgia, Times New Roman, serif;
+	}
+
+	img{
+      float: left;
+      margin: 0 15px 0 0;
+	}
+
+	hover{
+		background: #eee;
+		cursor: pointer;
+	}
+}
+
+h3{
+	font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+}
+
