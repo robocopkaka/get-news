@@ -1,22 +1,76 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
 body{
 	padding-top: 20px;
+}
+a{
+	text-decoration: none;
+}
+
+#source{
+	font-size: 30px;
+	color: red;
+	text-align: center;
+}
+
+#article-header{
+	color:#4C4E4D;
+	font-weight: bold;
+}
+
+#article-description{
+	font: 200 12px/1.5 Georgia, Times New Roman, serif;
+	font-size: 1rem;
+	color: black;
+	justify-content: space-around;
+}
+
+.news_group{
+	margin: 20px;
+	display: block;
+}
+
+.thumbnail-grid{
+	list-style-type: none;
+	width: 80%;
+}
+
+
+.thumbnail-image{
+	margin: auto;
+	width: 80px;
+	display: block;
+	height:80px;
+}
+
+.thumbnail-list-item{
+	padding: 10px 0 0 0;
+	overflow: auto;
+
+	// p{
+	//   font: 200 12px/1.5 Georgia, Times New Roman, serif;
+	// 	font-size: 1rem;
+	// }
+
+	// img{
+  //     float: left;
+  //     margin: 0 15px 0 0;
+	// }
+
+	hover{
+		background: #eee;
+		cursor: pointer;
+		text-decoration: none;
+	}
+
+	a{
+		color: #4C4E4D;
+	}
+}
+
+h3{
+	font: bold 2.5rem/1.5 Helvetica, Verdana, sans-serif;
 }

@@ -2,14 +2,31 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+a{
+	text-decoration: none;
+}
+
 #source{
 	font-size: 30px;
 	color: red;
 	text-align: center;
 }
 
+#article-header{
+	color:#4C4E4D;
+	font-weight: bold;
+}
+
+#article-description{
+	font: 200 12px/1.5 Georgia, Times New Roman, serif;
+	font-size: 1rem;
+	color: black;
+	justify-content: space-around;
+}
+
 .news_group{
 	margin: 20px;
+	display: block;
 }
 
 .thumbnail-grid{
@@ -17,26 +34,39 @@
 	width: 500px;
 }
 
+
+.thumbnail-image{
+	margin: auto;
+	width: 80px;
+	display: block;
+	height:80px;
+}
+
 .thumbnail-list-item{
 	padding: 10px;
 	overflow: auto;
 
-	p{
-	  font: 200 12px/1.5 Georgia, Times New Roman, serif;
-	}
+	// p{
+	//   font: 200 12px/1.5 Georgia, Times New Roman, serif;
+	// 	font-size: 1rem;
+	// }
 
-	img{
-      float: left;
-      margin: 0 15px 0 0;
-	}
+	// img{
+  //     float: left;
+  //     margin: 0 15px 0 0;
+	// }
 
 	hover{
 		background: #eee;
 		cursor: pointer;
+		text-decoration: none;
+	}
+
+	a{
+		color: #4C4E4D;
 	}
 }
 
 h3{
-	font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+	font: bold 30px/1.5 Helvetica, Verdana, sans-serif;
 }
-

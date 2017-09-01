@@ -11,10 +11,13 @@ module Adapter
 		end
 
 		def get_news
-			@sources.each do |source|
-				response = HTTParty.get("https://newsapi.org/v1/articles?source=" + source + "&apikey=" + @apikey)
-				@responses[source] = response["articles"][0..4]
-			end
+			# @sources.each do |source|
+			# 	response = HTTParty.get("https://newsapi.org/v1/articles?source=" + source + "&apikey=" + @apikey)
+			# 	@responses[source] = response["articles"][0..4]
+			# end
+			source = @sources.first
+			response = HTTParty.get("https://newsapi.org/v1/articles?source=" + source + "&apikey=" + @apikey)
+			@responses[source] = response["articles"][0..4]
 			@responses
 		end
 	end
