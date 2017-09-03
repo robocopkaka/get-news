@@ -34,6 +34,7 @@ gem 'devise'
 gem 'bootstrap-sass'
 gem 'httparty' #for making rest calls
 gem 'jquery-rails'
+gem 'webpacker'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
