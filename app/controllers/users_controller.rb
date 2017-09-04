@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :find_user, only: [:show,:edit, :update]
-  before_action authenticate_user!
+  # before_action authenticate_user!
   def show
     if @user.sources.nil?
       render 'sources/select_sources'
