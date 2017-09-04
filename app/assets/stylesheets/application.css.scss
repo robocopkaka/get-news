@@ -4,7 +4,7 @@
 @import "bootstrap";
 
 body{
-	padding-top: 20px;
+	padding-top: 50px;
 }
 a{
 	text-decoration: none;
@@ -19,6 +19,18 @@ a{
 #article-header{
 	color:#4C4E4D;
 	font-weight: bold;
+}
+
+#source-title{
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+#source-image{
+	margin: auto;
+	width: 80px;
+	display: block;
+	height:80px;
 }
 
 #article-description{
