@@ -2,9 +2,11 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "homes";
 
 body{
-	padding-top: 50px;
+	padding-top: 100px;
+	background: #fff;
 }
 a{
 	text-decoration: none;
