@@ -1,3 +1,3 @@
 class Source < ApplicationRecord
-  validate_uniqueness :name
+  validates_uniqueness_of :shortcode
 end
