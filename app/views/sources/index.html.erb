@@ -11,22 +11,24 @@
 
         <div class="panel-footer">
           <!-- Check if the user has the source already, and show 'Add if they do'. Remove otherwise -->
-          <template>
-            <button type="button" name="button" v-on:click.prevent="addSource(source.id, user.id)" class="btn btn-primary btn-small raised " id="add-button">
+          <!-- <template> -->
+            <button type="button" name="button" v-on:click.prevent="addSource(source)" class="btn btn-primary btn-small raised " id="add-button">
               Add
             </button>
-          </template>
+          <!-- </template> -->
         </div>
       </div>
       <div class="clearfix"></div>
     </div>
   </div>
-  <%= content_tag :div,
-    id: "user-info",
-    data: {
-      id: current_user.id,
-      sources: current_user.sources,
-      user: current_user
-    } do %>
+  <% if !current_user.nil? %>
+    <%= content_tag :div,
+      id: "user-info",
+      data: {
+        id: current_user.id,
+        sources: current_user.sources,
+        user: current_user
+      } do %>
+    <% end %>
   <% end %>
 </div>

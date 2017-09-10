@@ -4,7 +4,7 @@ import axios from 'axios'
 import TurbolinksAdapter from 'vue-turbolinks';
 Vue.use(TurbolinksAdapter)
 
-document.addEventListener('turbolinks:load', () => {
+document.addEventListener('DOMContentLoaded', () => {
   let token = document.getElementsByName('csrf-token')[0].getAttribute('content')
   axios.defaults.headers.common['X-CSRF-Token'] = token
   axios.defaults.headers.common['Accept'] = 'application/json'
@@ -14,17 +14,19 @@ document.addEventListener('turbolinks:load', () => {
   var current_user = element.dataset.user
 	new Vue({
 		el: '#sources',
-		data(){
-      return{
+		data:{
+        user_sources:[],
   			sources:[],
         user: JSON.parse(current_user),
-        new_sources:[],
-      }
+        index:0
 		},
     methods:{
       addSource(source_id){
+        // alert(this.index)
         // var source_id = source_id
-        this.new_sources.push(1)
+        // this is not refreshing the DOM. Consider adding to users once they click
+        Vue.set(this.user_sources, this.index++, source_id)
+        // this.user_sources.forEach(source => alert(source.name))
       }
     },
 
