@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'homes/index'
   root to: 'homes#index'
+  get 'users/add_source'
 
   devise_for :users, controllers: {registrations: 'users/registrations'}
 

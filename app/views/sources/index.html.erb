@@ -1,18 +1,32 @@
-<div class="row">
-  <% @sources.each do |source| %>
+<div class="row" id="sources">
+  <div v-for="(source, index) in sources">
     <div class="col-lg-4 col-md-4">
       <div class="panel panel-default">
         <div class="panel-heading" id="source-title">
-          <%= source.name %>
+           {{source.name}}
         </div>
         <div class="panel-body">
-          <%= image_tag(source.logo, id: "source-image") %>
+          <img v-bind:src="'../assets/'+source.logo" alt="Logo" id="source-image"> <!-- putting the path in '' helps. It throws an error otherwise -->
         </div>
 
         <div class="panel-footer">
+          <!-- Check if the user has the source already, and show 'Add if they do'. Remove otherwise -->
+          <template>
+            <button type="button" name="button" v-on:click.prevent="addSource(source.id, user.id)" class="btn btn-primary btn-small raised " id="add-button">
+              Add
+            </button>
+          </template>
         </div>
       </div>
       <div class="clearfix"></div>
     </div>
+  </div>
+  <%= content_tag :div,
+    id: "user-info",
+    data: {
+      id: current_user.id,
+      sources: current_user.sources,
+      user: current_user
+    } do %>
   <% end %>
 </div>
