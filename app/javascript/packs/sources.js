@@ -22,11 +22,16 @@ document.addEventListener('DOMContentLoaded', () => {
 		},
     methods:{
       addSource(source_id){
+        this.user_sources.push(source_id)
         // alert(this.index)
         // var source_id = source_id
         // this is not refreshing the DOM. Consider adding to users once they click
-        Vue.set(this.user_sources, this.index++, source_id)
+        // Vue.set(this.user_sources, this.index++, source_id)
         // this.user_sources.forEach(source => alert(source.name))
+      },
+      removeSource(source_id){
+        var index = this.user_sources.indexOf(source_id)
+        this.user_sources.splice(index,1)
       }
     },
 

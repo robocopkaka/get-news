@@ -11,11 +11,18 @@
 
         <div class="panel-footer">
           <!-- Check if the user has the source already, and show 'Add if they do'. Remove otherwise -->
-          <!-- <template> -->
-            <button type="button" name="button" v-on:click.prevent="addSource(source)" class="btn btn-primary btn-small raised " id="add-button">
+          <template v-if="user_sources.indexOf(source.id) === -1">
+            <button type="button" name="button" v-on:click.prevent="addSource(source.id)" class="btn btn-primary btn-small raised " id="add-button">
               Add
             </button>
-          <!-- </template> -->
+          </template>
+
+          <template v-else="user_sources.indexOf(source.id) === 1">
+            <button type="button" name="button" @click.prevent="removeSource(source.id)" class="btn btn-primary btn-small raised " id="remove-button">
+              Remove
+            </button>
+          </template>
+
         </div>
       </div>
       <div class="clearfix"></div>
