@@ -26,6 +26,9 @@
                         </li> -->
                         <li><%= link_to "News Sources", sources_path %></li>
                         <li><%= link_to "Read News", '#' %></li>
+                        <li v-if="return_sources_count > 0">
+                          <a href="#" v-on:click.prevent="saveSources"> Added <span class="badge">{{return_sources_count}}</span> </a>
+                        </li>
                         <!-- <li class=" dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Managers <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">View Managers</a></li>

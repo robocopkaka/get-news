@@ -37,6 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		mounted(){
 			axios.get('/sources.json').then(response => this.sources = response.data);
-		}
+		},
+    computed:{
+      return_sources_count(){
+        return this.user_sources.length
+      }
+    }
 	})
 })

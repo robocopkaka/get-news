@@ -14,7 +14,8 @@ class UsersController < ApplicationController
   end
 
   def add_source
-
+    @user = User.find_by_id(params[:id])
+    @user.sources
   end
 
   private
