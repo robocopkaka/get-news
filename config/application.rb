@@ -16,8 +16,8 @@ module GetNews
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    config.web_console.whitelisted_ips = '192.168.8.102'
-    config.web_console.whitelisted_ips = '192.168.8.101'
-    config.web_console.whitelisted_ips = '192.168.8.103'
+    # config.web_console.whitelisted_ips = '192.168.8.102'
+    # config.web_console.whitelisted_ips = '192.168.8.101'
+    # config.web_console.whitelisted_ips = '192.168.8.103'
   end
 end
