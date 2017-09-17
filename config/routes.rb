@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   get 'homes/index'
   root to: 'homes#index'
   get 'users/add_source'
+  post 'confirm_sources'=> 'sources#confirm_sources'
+  get 'confirm_sources'=> 'sources#confirm_sources'
 
   devise_for :users, controllers: {registrations: 'users/registrations'}
 

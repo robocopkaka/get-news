@@ -4,7 +4,7 @@ import axios from 'axios'
 import TurbolinksAdapter from 'vue-turbolinks';
 Vue.use(TurbolinksAdapter)
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('turbolinks:load', () => {
   let token = document.getElementsByName('csrf-token')[0].getAttribute('content')
   axios.defaults.headers.common['X-CSRF-Token'] = token
   axios.defaults.headers.common['Accept'] = 'application/json'
@@ -17,22 +17,25 @@ document.addEventListener('DOMContentLoaded', () => {
 		data:{
         user_sources:[],
   			sources:[],
-        user: JSON.parse(current_user),
+        current_user_sources: JSON.parse(current_user).sources,
         index:0
 		},
     methods:{
-      addSource(source_id){
-        this.user_sources.push(source_id)
-        // alert(this.index)
-        // var source_id = source_id
-        // this is not refreshing the DOM. Consider adding to users once they click
-        // Vue.set(this.user_sources, this.index++, source_id)
-        // this.user_sources.forEach(source => alert(source.name))
+      addSource(source){
+        this.current_user_sources.push(source)
       },
-      removeSource(source_id){
-        var index = this.user_sources.indexOf(source_id)
-        this.user_sources.splice(index,1)
-      }
+      removeSource(source){
+        var index = this.current_user_sources.indexOf(source)
+        this.current_user_sources.splice(index,1)
+      },
+      confirmSources(){
+        var id = ''
+        var user_sources = this.current_user_sources.map(source => {
+          return source.id
+        })
+        var sources = JSON.stringify(this.user_sources)
+        axios.post('/confirm_sources', JSON.stringify(user_sources)).then(response => console.log(response))
+      },
     },
 
 		mounted(){

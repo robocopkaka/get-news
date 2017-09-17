@@ -1,3 +1,4 @@
+require 'json'
 class SourcesController < ApplicationController
   def index
     @sources = Source.all
@@ -19,6 +20,14 @@ class SourcesController < ApplicationController
   end
 
   def update
+  end
+
+  def confirm_sources
+    @sources = params[:sources]
+    logger.info("#{params[:sources]}")
+    respond_to do |format|
+      format.json{render json: @sources}
+    end
   end
 
   private
