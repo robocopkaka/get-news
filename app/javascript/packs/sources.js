@@ -22,25 +22,38 @@ document.addEventListener('turbolinks:load', () => {
 		},
     methods:{
       addSource(source){
-        this.current_user_sources.push(source)
+        // this.current_user_sources.push(source.shortcode)
+        this.user_sources.push(source)
       },
       removeSource(source){
-        var index = this.current_user_sources.indexOf(source)
-        this.current_user_sources.splice(index,1)
+        var index = user_sources.indexOf(source)
+        // this.current_user_sources.splice(index,1)
+        this.user_sources.splice(index,1)
+      },
+      //only show sources if the user doesn't have them saved and  if he hasn't selected them
+      checkSourceExists(source){
+        if (this.current_user_sources.indexOf(source.shortcode) === -1 && this.user_sources.indexOf(source) === -1){
+          return true;
+        }
       },
       confirmSources(){
         var id = ''
-        var user_sources = this.current_user_sources.map(source => {
-          return source.id
+        var user_sources = this.user_sources.map(source => {
+         return source.shortcode;
+        });
+        var current_user_sources = user_sources.forEach(source => this.current_user_sources.push(source))
+        axios.post('/confirm_sources', {sources: JSON.stringify(user_sources)}).then(response => {
+          alert("you just added " + this.user_sources.map(source => source.name).toString())
+          this.user_sources = []
         })
-        var sources = JSON.stringify(this.user_sources)
-        axios.post('/confirm_sources', JSON.stringify(user_sources)).then(response => console.log(response))
       },
     },
 
 		mounted(){
 			axios.get('/sources.json').then(response => this.sources = response.data);
 		},
+    updated(){
+    },
     computed:{
       return_sources_count(){
         return this.user_sources.length

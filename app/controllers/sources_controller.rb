@@ -23,8 +23,12 @@ class SourcesController < ApplicationController
   end
 
   def confirm_sources
-    @sources = params[:sources]
-    logger.info("#{params[:sources]}")
+    @sources = JSON.parse(params[:sources])
+    @sources.each{|source| current_user.sources << source}
+    # logger.info("#{@sources}")
+    # current_user.sources << @sources
+    current_user.save
+    # logger.info("#{JSON.parse(params[:sources])}")
     respond_to do |format|
       format.json{render json: @sources}
     end

@@ -1,8 +1,9 @@
 <div class="row"  id="sources">
   <div class="col-lg-8 col-md-8">
-    <div v-for="(source, index) in sources">
-      <!-- <div class="col-lg-4 col-md-4"> -->
-        <div class="panel panel-success" style="width:60%;" v-show="current_user_sources.indexOf(source.id === 1)">
+    <h3>Available News Sources<h3>
+    <div v-for="(source, index) in sources"   v-if="checkSourceExists(source)">
+      <template>
+        <div class="panel panel-success" style="width:60%;">
           <div class="panel-heading" id="source-title">
              <!-- {{source.name}} -->
           </div>
@@ -15,12 +16,12 @@
                 {{source.name}}
               </div>
               <div style="padding-top:10px;">
-                <template v-if="user_sources.indexOf(source) === -1">
+                <template v-if="user_sources.indexOf(source) == -1">
                   <button type="button" name="button" v-on:click.prevent="addSource(source)" class="btn btn-primary btn-small raised " id="add-button">
                     <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
                   </button>
                 </template>
-                <template v-else="user_sources.indexOf(source) === 1">
+                <template v-else="user_sources.indexOf(source) == 1">
                   <button type="button" name="button" @click.prevent="removeSource(source)" class="btn btn-red-primary btn-small raised " id="remove-button">
                     <i class="fa fa-times fa-lg" aria-hidden="true"></i>
                   </button>
@@ -28,8 +29,14 @@
               </div>
             </div>
           </div>
-
         </div>
+      </template>
+      <!-- <template v-show>
+          <div class="panel panel-success">
+            <div class="panel-heading"></div>
+            <div class="panel-body"> Yay! You've added all the sources </div>
+          </div>
+      </template> -->
         <div class="clearfix"></div>
       <!-- </div> -->
     </div>
@@ -48,6 +55,11 @@
               <div v-for="(source, index) in user_sources" style="padding-bottom:10px;">
                 <li class="list-group-item">
                   {{source.name}}
+                  <div style="float:right;">
+                    <span @click.prevent="removeSource(source)"id="remove-button" style="color:red;">
+                      <i class="fa fa-times fa-lg" aria-hidden="true"></i>
+                    </span>
+                  </div>
                 </li>
               </div>
             </ol>
