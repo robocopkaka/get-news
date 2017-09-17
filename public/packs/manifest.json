@@ -1,0 +1,8 @@
+{
+  "app.css": "/packs/app.css",
+  "app.js": "/packs/app.js",
+  "application.js": "/packs/application.js",
+  "hello_vue.js": "/packs/hello_vue.js",
+  "sources.css": "/packs/sources.css",
+  "sources.js": "/packs/sources.js"
+}
