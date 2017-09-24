@@ -55,7 +55,7 @@
                               <li><%= link_to "My Profile", user_path(current_user) %></li>
                             </ul>
                         </li>
-                        <li class=""><a href="#">Logout</a></li>
+                        <li class=""><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
                       <% else %>
                         <li><%= link_to "Log In", new_user_session_path %></li>
                       <% end %>

@@ -2,7 +2,14 @@
   <div class="col-lg-8 col-md-8">
     <h3>Available News Sources<h3>
     <div v-for="(source, index) in sources"   v-if="checkSourceExists(source)">
-      <template>
+      <non-logged-in-user :is="currentView" :sources="sources"></non-logged-in-user>
+    </div>
+  </div>
+</div>
+
+
+<template id="logged-in-user">
+
         <div class="panel panel-success" style="width:60%;">
           <div class="panel-heading" id="source-title">
              <!-- {{source.name}} -->
@@ -30,7 +37,6 @@
             </div>
           </div>
         </div>
-      </template>
       <!-- <template v-show>
           <div class="panel panel-success">
             <div class="panel-heading"></div>
@@ -39,8 +45,6 @@
       </template> -->
         <div class="clearfix"></div>
       <!-- </div> -->
-    </div>
-  </div>
   <div class="col-lg-4 col-md-8">
     <!-- Add code to let users confirm their sources or remove them. Also remove added sources
     from the first div and add back later when removed from here. -->
@@ -84,4 +88,77 @@
       } do %>
     <% end %>
   <% end %>
-</div>
+</template>
+
+<template id="non-logged-in-user">
+  <div>
+      <div class="panel panel-success" style="width:60%;">
+        <div class="panel-heading" id="source-title">
+           <!-- {{source.name}} -->
+        </div>
+        <div class="panel-body">
+          <div style="float: left;">
+            <img v-bind:src="'../assets/'+source.logo" alt="Logo" id="source-image"> <!-- putting the path in '' helps. It throws an error otherwise -->
+          </div>
+          <div  style="padding-left:120px;">
+            <div id="source-title">
+              {{source.name}}
+            </div>
+            <div style="padding-top:10px;">
+              <template v-if="user_sources.indexOf(source) == -1">
+                <button type="button" name="button"  class="btn btn-primary btn-small raised " id="add-button">
+                  <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
+                </button>
+              </template>
+              <template v-else="user_sources.indexOf(source) == 1">
+                <button type="button" name="button" class="btn btn-red-primary btn-small raised " id="remove-button">
+                  <i class="fa fa-times fa-lg" aria-hidden="true"></i>
+                </button>
+              </template>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- <template v-show>
+        <div class="panel panel-success">
+          <div class="panel-heading"></div>
+          <div class="panel-body"> Yay! You've added all the sources </div>
+        </div>
+    </template> -->
+      <div class="clearfix"></div>
+        <!-- </div> -->
+    <div class="col-lg-4 col-md-8">
+      <!-- Add code to let users confirm their sources or remove them. Also remove added sources
+      from the first div and add back later when removed from here. -->
+      <div class="row" v-if="return_sources_count > 0">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h4>Sites you just added</h4>
+          </div>
+          <div class="panel-body">
+            <div>
+              <ol class="list-group">
+                <div v-for="(source, index) in user_sources" style="padding-bottom:10px;">
+                  <li class="list-group-item">
+                    {{source.name}}
+                    <div style="float:right;">
+                      <span @click.prevent="removeSource(source)"id="remove-button" style="color:red;">
+                        <i class="fa fa-times fa-lg" aria-hidden="true"></i>
+                      </span>
+                    </div>
+                  </li>
+                </div>
+              </ol>
+            </div>
+          </div>
+          <div class="panel-footer">
+            <button type="button" name="button" v-on:click="confirmSources" class="confirm-btn btn-success">
+              Confirm
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</template>

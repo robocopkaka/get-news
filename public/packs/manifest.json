@@ -1,8 +1,8 @@
 {
-  "app.css": "/packs/app.css",
-  "app.js": "/packs/app.js",
-  "application.js": "/packs/application.js",
-  "hello_vue.js": "/packs/hello_vue.js",
-  "sources.css": "/packs/sources.css",
-  "sources.js": "/packs/sources.js"
+  "app.css": "http://127.0.0.1:8080/packs/app.css",
+  "app.js": "http://127.0.0.1:8080/packs/app.js",
+  "application.js": "http://127.0.0.1:8080/packs/application.js",
+  "hello_vue.js": "http://127.0.0.1:8080/packs/hello_vue.js",
+  "sources.css": "http://127.0.0.1:8080/packs/sources.css",
+  "sources.js": "http://127.0.0.1:8080/packs/sources.js"
 }

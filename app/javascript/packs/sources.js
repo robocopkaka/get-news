@@ -2,6 +2,7 @@ import Vue from 'vue/dist/vue'
 import App from './app.vue'
 import axios from 'axios'
 import TurbolinksAdapter from 'vue-turbolinks';
+import localforage from 'localforage'
 Vue.use(TurbolinksAdapter)
 
 document.addEventListener('turbolinks:load', () => {
@@ -9,17 +10,15 @@ document.addEventListener('turbolinks:load', () => {
   axios.defaults.headers.common['X-CSRF-Token'] = token
   axios.defaults.headers.common['Accept'] = 'application/json'
   var element = document.getElementById('user-info');
-  var user_id = element.dataset.id
-  var user_sources = element.dataset.sources
-  var current_user = element.dataset.user
-	new Vue({
-		el: '#sources',
-		data:{
-        user_sources:[],
-  			sources:[],
-        current_user_sources: JSON.parse(current_user).sources,
-        index:0
-		},
+  if(element !== null){
+    var user_id = element.dataset.id
+    var user_sources = element.dataset.sources
+    var current_user = element.dataset.user
+  }
+
+  Vue.component("logged-in-user", {
+    template:'#logged-in-user',
+    props: ['sources'],
     methods:{
       addSource(source){
         // this.current_user_sources.push(source.shortcode)
@@ -48,16 +47,59 @@ document.addEventListener('turbolinks:load', () => {
         })
       },
     },
-
-		mounted(){
-			axios.get('/sources.json').then(response => this.sources = response.data);
-		},
-    updated(){
-    },
     computed:{
       return_sources_count(){
         return this.user_sources.length
       }
     }
+  })
+
+  Vue.component("non-logged-in-user", {
+    template: '#non-logged-in-user',
+    props:['sources', 'return_sources_count'],
+    data(){
+      return{
+        mutableSources: [],
+        user_sources:[],
+      }
+    },
+    mounted():{
+      this.mutableSources = this.sources
+    }
+  })
+
+	new Vue({
+		el: '#sources',
+		data:{
+      currentView: 'non-logged-in-user',
+        user_sources:[],
+  			sources:[],
+        // current_user_sources: JSON.parse(current_user).sources,
+        // index:0,
+        // current_user: current_user
+		},
+    methods:{
+      addSource(source){
+
+      },
+      removeSource(source){
+
+      },
+      //only show sources if the user doesn't have them saved and  if he hasn't selected them
+      checkSourceExists(source){
+
+      },
+      confirmSources(){
+
+      },
+    },
+    computed:{
+      return_sources_count(){
+        return 0
+      }
+    },
+    mounted(){
+			axios.get('/sources.json').then(response => this.sources = response.data);
+		},
 	})
 })
