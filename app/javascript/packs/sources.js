@@ -12,71 +12,76 @@ document.addEventListener('turbolinks:load', () => {
   var element = document.getElementById('user-info');
   if(element !== null){
     var user_id = element.dataset.id
-    var user_sources = element.dataset.sources
+    var fetched_user_sources = element.dataset.sources
     var current_user = element.dataset.user
   }
 
-  Vue.component("logged-in-user", {
-    template:'#logged-in-user',
-    props: ['sources'],
-    methods:{
-      addSource(source){
-        // this.current_user_sources.push(source.shortcode)
-        this.user_sources.push(source)
-      },
-      removeSource(source){
-        var index = user_sources.indexOf(source)
-        // this.current_user_sources.splice(index,1)
-        this.user_sources.splice(index,1)
-      },
-      //only show sources if the user doesn't have them saved and  if he hasn't selected them
-      checkSourceExists(source){
-        if (this.current_user_sources.indexOf(source.shortcode) === -1 && this.user_sources.indexOf(source) === -1){
-          return true;
-        }
-      },
-      confirmSources(){
-        var id = ''
-        var user_sources = this.user_sources.map(source => {
-         return source.shortcode;
-        });
-        var current_user_sources = user_sources.forEach(source => this.current_user_sources.push(source))
-        axios.post('/confirm_sources', {sources: JSON.stringify(user_sources)}).then(response => {
-          alert("you just added " + this.user_sources.map(source => source.name).toString())
-          this.user_sources = []
-        })
-      },
-    },
-    computed:{
-      return_sources_count(){
-        return this.user_sources.length
-      }
-    }
-  })
-
-  Vue.component("non-logged-in-user", {
-    template: '#non-logged-in-user',
-    props:['sources', 'return_sources_count'],
-    data(){
-      return{
-        mutableSources: [],
-        user_sources:[],
-      }
-    },
-    mounted():{
-      this.mutableSources = this.sources
-    }
-  })
+  // Vue.component("logged-in-user", {
+  //   template:'#logged-in-user',
+  //   props: ['sources'],
+  //   data(){
+  //     return{
+  //       mutableSources: [],
+  //     }
+  //   },
+  //   methods:{
+  //     addSource(source){
+  //       // this.current_user_sources.push(source.shortcode)
+  //       this.user_sources.push(source)
+  //     },
+  //     removeSource(source){
+  //       var index = user_sources.indexOf(source)
+  //       // this.current_user_sources.splice(index,1)
+  //       this.user_sources.splice(index,1)
+  //     },
+  //     //only show sources if the user doesn't have them saved and  if he hasn't selected them
+  //     checkSourceExists(source){
+  //       if (this.current_user_sources.indexOf(source.shortcode) === -1 && this.user_sources.indexOf(source) === -1){
+  //         return true;
+  //       }
+  //     },
+  //     confirmSources(){
+  //       var id = ''
+  //       var user_sources = this.user_sources.map(source => {
+  //        return source.shortcode;
+  //       });
+  //       var current_user_sources = user_sources.forEach(source => this.current_user_sources.push(source))
+  //       axios.post('/confirm_sources', {sources: JSON.stringify(user_sources)}).then(response => {
+  //         alert("you just added " + this.user_sources.map(source => source.name).toString())
+  //         this.user_sources = []
+  //       })
+  //     },
+  //   },
+  //   computed:{
+  //     return_sources_count(){
+  //       return this.user_sources.length
+  //     }
+  //   }
+  // })
+  //
+  // Vue.component("non-logged-in-user", {
+  //   template: '#non-logged-in-user',
+  //   props:['sources', 'return_sources_count'],
+  //   data(){
+  //     return{
+  //       mutableSources: [],
+  //       non_logged_user_sources: [],
+  //     }
+  //   },
+  //   mounted(){
+  //     this.mutableSources = this.sources
+  //   }
+  // })
 
 	new Vue({
 		el: '#sources',
 		data:{
-      currentView: 'non-logged-in-user',
+      // currentView: 'non-logged-in-user',
         user_sources:[],
   			sources:[],
-        // current_user_sources: JSON.parse(current_user).sources,
-        // index:0,
-        // current_user: current_user
+        current_user_sources: fetched_user_sources,
+        index:0,
+        current_user: current_user
 		},
     methods:{
       addSource(source){
@@ -87,7 +92,9 @@ document.addEventListener('turbolinks:load', () => {
       },
       //only show sources if the user doesn't have them saved and  if he hasn't selected them
       checkSourceExists(source){
-
+        if (this.current_user_sources.indexOf(source.shortcode) === -1 && this.user_sources.indexOf(source) === -1){
+          return true;
+        }
       },
       confirmSources(){
 
