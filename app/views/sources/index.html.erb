@@ -77,6 +77,13 @@
 </div>
 
 <% if user_signed_in? %>
-  
+  <%= content_tag :div,
+    id: "user-info",
+    data: {
+      id: current_user.id,
+      sources: current_user.sources,
+      user: current_user
+    } do %>
+  <% end %>
   curl -X GET --header 'Authorization: Bearer <%= JWTWrapper.encode({ user_id: current_user.id }) %>' 'http://localhost:5000/sources'
 <% end %>
