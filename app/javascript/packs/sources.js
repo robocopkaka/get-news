@@ -14,6 +14,11 @@ document.addEventListener('turbolinks:load', () => {
     var user_id = element.dataset.id
     var fetched_user_sources = element.dataset.sources
     var current_user = element.dataset.user
+    var logged_in = true
+  }
+  else{
+    var fetched_user_sources = []
+    var logged_in = false
   }
 
   // Vue.component("logged-in-user", {
@@ -73,6 +78,16 @@ document.addEventListener('turbolinks:load', () => {
   //   }
   // })
 
+  Vue.component('login-modal',{
+    template: '#login',
+    props:{
+      show:{
+        type: Boolean,
+        required: true,
+        twoWay: true,
+      }
+    }
+  })
 	new Vue({
 		el: '#sources',
 		data:{
@@ -81,14 +96,18 @@ document.addEventListener('turbolinks:load', () => {
   			sources:[],
         current_user_sources: fetched_user_sources,
         index:0,
-        current_user: current_user
+        current_user: current_user,
+        logged_in: logged_in,
+        showModal: false,
 		},
     methods:{
       addSource(source){
-
+        // this.current_user_sources.push(source.shortcode)
+        this.user_sources.push(source)
       },
       removeSource(source){
-
+        var index = this.user_sources.indexOf(source)
+        this.user_sources.splice(index, 1)
       },
       //only show sources if the user doesn't have them saved and  if he hasn't selected them
       checkSourceExists(source){
@@ -97,12 +116,38 @@ document.addEventListener('turbolinks:load', () => {
         }
       },
       confirmSources(){
-
+        if(this.logged_in == true){
+          var id = ''
+          var user_sources = this.user_sources.map(source => {
+            return source.shortcode;
+          });
+          axios.post('/confirm_sources', {sources: JSON.stringify(user_sources)}).then(response => {
+            alert("you just added " + this.user_sources.map(source => source.name).toString())
+            this.user_sources = []
+          })
+        }
+        else{
+          alert("You need to log in first")
+          this.login();
+          var user_sources = this.user_sources.map(source => {
+            return source.shortcode;
+          });
+          axios.post('/confirm_sources', {sources: JSON.stringify(user_sources)}).then(response => {
+            alert("you just added " + this.user_sources.map(source => source.name).toString())
+            this.user_sources = []
+          })
+        }
       },
+      login(){
+        axios.post('/users').then(response => {
+          this.current_user_sources = response.data.sources
+        })
+
+      }
     },
     computed:{
       return_sources_count(){
-        return 0
+        return this.user_sources.length
       }
     },
     mounted(){

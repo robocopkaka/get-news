@@ -11,17 +11,17 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
-    user = User.find_by(email: params[:email].to_s.downcase)
-
-    if user && user.authenticate(params[:password])
-      self.resource = warden.authenticate!(auth_options)
-      sign_in(resource_name, resource)
-      yield resource if block_given?
-      render json: JWTWrapper.encode({user_id:current_user.id})
-    else
-      render json: {error: 'Invalid username / password'}, status: :unauthorized
-    end
-    # super
+    # user = User.find_by(email: params[:email].to_s.downcase)
+    #
+    # if user && user.authenticate(params[:password])
+    #   self.resource = warden.authenticate!(auth_options)
+    #   sign_in(resource_name, resource)
+    #   yield resource if block_given?
+    #   render json: JWTWrapper.encode({user_id:current_user.id})
+    # else
+    #   render json: {error: 'Invalid username / password'}, status: :unauthorized
+    # end
+    super
   end
 
   # DELETE /resource/sign_out
